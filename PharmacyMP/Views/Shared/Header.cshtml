@@ -1,0 +1,37 @@
+﻿@using System.Security.Claims;
+<header>
+    <ul>
+        <li><a asp-controller="Products" asp-action="Index">Products</a></li>
+        @if (User.FindFirst(ClaimTypes.Role)?.Value! == "Admin")
+        {
+            <li><a asp-controller="Users" asp-action="Index">Users</a></li>
+        }
+    </ul>
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        <form method="post">
+            <button type="submit" asp-controller="Users" asp-action="PersonalAccount" asp-route-id="">
+                Personal Account
+            </button>
+        </form>
+        <form method="post">
+            <button type="submit" asp-controller="Authorization" asp-action="Logout">
+                Sign out
+            </button>
+        </form>
+    }
+    else
+    {
+        <form method="post">
+            <button type="submit" asp-controller="Authorization" asp-action="Login">
+                Sign In
+            </button>
+        </form>
+        <form method="post">
+            <button type="submit" asp-controller="Authorization" asp-action="SignUp" >
+                Sign Up
+            </button>
+        </form>
+    }
+</header>

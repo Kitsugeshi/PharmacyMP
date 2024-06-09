@@ -1,0 +1,91 @@
+﻿@model Pharmacy.ViewModels.AccountViewModel
+
+<h4 style="margin-left: 95px">Ваша информация:</h4>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Login
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                Gender
+            </th>
+            <th>
+                Phone
+            </th>
+            <th>
+                Email
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => Model.User.Login)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.User.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.User.Gender)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.User.Phone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.User.Email)
+                </td>
+            </tr>
+        
+    </tbody>
+</table>
+<hr />
+@if (Model.CartItems.Count != 0)
+{
+    
+<h4 style="margin-left: 95px">Ваша коризна:</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Price
+                </th>
+                <th>
+                    Quantity
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.Products.Count; i++)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.Products[i].Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.CartItems[i].Price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.CartItems[i].Quantity)
+                    </td>
+                    <td>
+                        <a asp-controller="Products" asp-action="PutAway" asp-route-id="@Model.CartItems[i].Id">Delete from cart</a> 
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <form method="post">
+        <button style="margin-left: 95px" type="submit" asp-controller="Products" asp-action="BuyAllProducts">
+            Buy all
+        </button>
+    </form>
+}
