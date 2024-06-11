@@ -5,11 +5,11 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Products</h1>
 
 @if (User.FindFirst(ClaimTypes.Role)?.Value! == "Admin")
 {
-    <p class="RaiyanGoosling">
+    <p class="createa">
         <a asp-action="Create">Create New</a>
     </p>
 }
